@@ -1,0 +1,8 @@
+<div
+  {% if id %}id="{{id}}"{% endif %}
+  class="alert alert-{{variant}} {% if text_center %}text-center{% endif %}"
+  role="{{variant}}"
+  style="{{style}}"
+>
+  {{message}}
+</div>

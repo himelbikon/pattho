@@ -1,0 +1,86 @@
+# Byte-compiled files
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Django secret key and settings files
+*.sqlite3
+*.log
+*.pot
+*.py[cod]
+db.sqlite3
+
+# Local settings file
+local_settings.py
+
+# Media files
+media/
+
+# Static files
+/staticfiles/
+/static/
+
+# Ignore folders for IDEs and editors
+.idea/
+.vscode/
+*.swp
+
+# Testing
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+
+# Migrations
+*.pyc
+__pycache__/
+*/migrations/*
+
+# macOS-specific files
+.DS_Store
+
+# Windows-specific files
+Thumbs.db
+
+# Ignore pip-related files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Compiled code
+*.so
+
+# Celery worker log files
+celerybeat-schedule
+*.pid
+
+# pyenv
+.python-version
+
+# Docker files
+*.env
+*.pid
+docker-compose.override.yml
+
+# Build files
+build/
+dist/
+*.egg-info/
+*.eggs/
+
+# Node.js
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
+
+
+.dev
+dev

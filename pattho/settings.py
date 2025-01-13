@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'instructor',
     'course',
     'saasowner',
+    'dashboard',
+    
 
     'django_cleanup',
 ]

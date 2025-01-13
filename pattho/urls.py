@@ -25,6 +25,7 @@ urlpatterns = [
     path('saasowner/', include('saasowner.urls.urls')),
     path('', include('core.urls.urls')),
     path('user/', include('user.urls.urls')),
+    path('dashboard/', include('dashboard.urls.urls')),
     # path('student/', include('student.urls.urls')),
     # path('instructor/', include('instructor.urls.urls')),
 ]

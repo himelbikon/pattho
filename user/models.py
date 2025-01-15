@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
+from instructor import models as instructor_models
 
 class UserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None):
@@ -75,3 +76,7 @@ class User(AbstractUser):
     @property
     def name(self):
         return f'{self.first_name} {self.last_name}'
+
+    @property
+    def is_instructor(self):
+        return instructor_models.Instructor.objects.filter(user=self).exists()

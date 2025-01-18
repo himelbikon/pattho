@@ -1,9 +1,121 @@
-{% extends 'dashboard/app.html' %}
+{% extends 'dashboard/app.html' %} 
 
 {% block content %}
 
-<div class="container">
-  <h1>Be an Instructor</h1>
-</div>
+<section class="container">
+  {% include 'components/messages.html' %} 
+  <div id="success_message" class="d-none"></div>
+  <div id="error_message" class="d-none"></div>
+  
+  {% if not user.is_instructor %}
+  <h1 class="text-center my-3">Be an Instructor</h1>
 
-{% endblock content %}
+  <div class="row d-flex justify-content-center">
+    <div class="col-8">
+      <div class="text-center border border-1 p-3">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Quisquam, voluptatibus.
+        </p>
+        <form
+          action="{% url 'instructor:become_an_instructor' %}"
+          method="post"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">
+            Become an Instructor
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="row my-3">
+    <div class="col-12">
+      <h3 class="text-center my-3">Select your category</h3>
+    </div>
+
+    {% for category in course_categories %}
+    <div class="col-12 col-md-3 mb-2">
+      <div class="border border-1 p-3 h-100 w-100">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="category-{{category.id}}"
+            {% if category in user.instructor.categories.all %}checked{% endif %}
+          />
+          <label class="form-check-label" for="category-{{category.id}}">
+            {{category.name}}
+          </label>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="text-center">
+      <button id="category-submit-button" type="submit" class="btn btn-success">
+        Submit
+      </button>
+    </div>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock content %} 
+
+{% block js %}
+
+<script>
+  const updateCategories = () => {
+    const successMessage = document.getElementById("success_message");
+    const errorMessage = document.getElementById("error_message");
+
+    const categories = [];
+    const csrfmiddlewaretoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    const categoryInputs = document.querySelectorAll('input[type="checkbox"]');
+    categoryInputs.forEach((input) => {
+      if (input.checked) {
+        categories.push(input.id.split("-")[1]);
+      }
+    });
+
+    fetch("{% url 'instructor:update:update_instructor_category' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfmiddlewaretoken,
+      },
+      body: JSON.stringify({
+        categories: categories,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.status === "success") {
+          successMessage.innerHTML = data.html;
+          successMessage.classList.remove("d-none");
+
+        } else {
+          errorMessage.innerHTML = data.html;
+          errorMessage.classList.remove("d-none");
+        }
+      })
+      .catch((error) => {
+        // console.error(error);
+      })
+      .finally(() => {
+        // console.log("Request completed");
+      });
+  };
+
+
+
+  document.querySelector("#category-submit-button").addEventListener("click", () => {
+    updateCategories();
+  });
+</script>
+
+{% endblock js %}

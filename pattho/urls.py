@@ -27,7 +27,7 @@ urlpatterns = [
     path('user/', include('user.urls.urls')),
     path('dashboard/', include('dashboard.urls.urls')),
     # path('student/', include('student.urls.urls')),
-    # path('instructor/', include('instructor.urls.urls')),
+    path('instructor/', include('instructor.urls.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

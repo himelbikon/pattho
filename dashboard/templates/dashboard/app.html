@@ -36,7 +36,7 @@
 <body class="index-page">
 
   {% include 'dashboard/header.html' %}
-
+  {% csrf_token %}
   <main class="main" style="min-height: 80vh;">
     {% block content %} {% endblock content %}
   </main>

@@ -78,7 +78,7 @@ class User(AbstractUser):
         return f'{self.first_name} {self.last_name}'
 
     @property
-    def user_image_url(self):
+    def image_url(self):
         if self.image:
             return self.image.url
         return '/static/image/user/demo-user.png'

@@ -1,0 +1,192 @@
+{% extends 'app.html' %}
+
+{% block title %} Index {% endblock title %}
+
+{% block css %}
+<style>
+    .chat-container {
+        height: 85vh;
+        /* display: flex; */
+        overflow: hidden;
+        
+        width: 90%;
+        /* max-width: 1200px; */
+        margin: 10px auto;
+    }
+
+    .chat-box {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-radius: 10px;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    }
+
+    .messages {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .message-container {
+        display: flex;
+        /* align-items: center; */
+        margin-bottom: 15px;
+    }
+
+    .message {
+        max-width: 90%;
+        padding: 15px;
+        border-radius: 15px;
+        position: relative;
+        font-size: 14px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .message .timestamp {
+        font-size: 0.75rem;
+        color: #666;
+        text-align: right;
+        margin-top: 5px;
+    }
+
+    .message.received {
+        text-align: left;
+        background-color: #e9ecef;
+        border-bottom-left-radius: 0;
+    }
+
+    .message.sent {
+        text-align: right;
+        background-color: #c7f1dd;
+        border-bottom-right-radius: 0;
+    }
+
+    .message-input {
+        border-top: 1px solid #ddd;
+        padding: 10px;
+        background: #fff;
+    }
+
+    .inbox-user {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        transition: background 0.3s;
+    }
+
+    .inbox-user:hover {
+        background: #f1f1f1;
+        cursor: pointer;
+    }
+
+    .inbox-user img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .chat-user-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    /* Media Query for Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .chat-container {
+            flex-direction: column;
+            height: auto;
+        }
+
+
+        .chat-box {
+            height: 90vh;
+        }
+
+        .message-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .message-container img {
+            margin-bottom: 10px;
+        }
+
+        .message.sent {
+            text-align: left;
+        }
+
+        .message.received {
+            text-align: right;
+        }
+
+        .message-input {
+            padding: 10px 5px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .chat-container {
+            width: 100%;
+        }
+
+        .message {
+            font-size: 13px;
+        }
+
+        .message-input input {
+            font-size: 14px;
+        }
+
+        .message-input button {
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+<!-- <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;"> -->
+    <div class="row justify-content-center chat-container">
+
+        <!-- Chat Box -->
+        <div class="col-12 col-md-6 chat-box my-2 shadow">
+            <div class="messages">
+                <div class="message-container">
+                    <img src="person.png" alt="User" class="chat-user-img">
+                    <div class="message received">
+                        Hello! How are you? I've enhanced the design with custom CSS for a modern and polished look. Let me know if you need further refinements!
+                        <div class="timestamp">10:30 AM</div>
+                    </div>
+                </div>
+                <div class="message-container" style="justify-content: flex-end;">
+                    <div class="message sent">
+                        I'm good, thanks! I've enhanced the design with custom CSS for a modern and polished look. Let me know if you need further refinements!
+                        <div class="timestamp">10:32 AM</div>
+                    </div>
+                    <img src="person.png" alt="User" class="chat-user-img">
+                </div>
+            </div>
+            <div class="message-input">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Type a message...">
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+
+{% endblock %}
+
+{% block js %}
+<script>
+    const body = document.body;
+    body.classList.add('bg-light');
+</script>
+{% endblock js %}

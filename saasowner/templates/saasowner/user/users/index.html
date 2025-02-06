@@ -1,0 +1,31 @@
+{% extends 'saasowner/app.html' %}
+
+{% block content %}
+
+<div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for normal_user in users %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>
+                        <img class="img-fluid me-2" width="40px" src="{{ normal_user.image_url }}" alt="{{ user.username }}">
+                        {{normal_user.email}}
+                    </td>
+                    <td>{{normal_user.name}}</td>
+                    <td>Otto</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock content %}

@@ -5,9 +5,10 @@ class Room(models.Model):
     UUID_LENGTH = 20
 
     name = models.CharField(max_length=255)
+    logo = models.ImageField(upload_to='chat/room/logo/', null=True, blank=True)
     users = models.ManyToManyField('user.User', blank=True)
 
-    uuid = models.CharField(max_length=255)
+    uuid = models.CharField(max_length=255, unique=True)
     created_at = models.DateField(auto_now_add=True)
 
     class Meta:
@@ -33,17 +34,17 @@ class Room(models.Model):
 class Message(models.Model):
     UUID_LENGTH = 30
 
-    sneder = models.ForeignKey('user.User', on_delete=models.CASCADE)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    sender = models.ForeignKey('user.User', on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="messages")
     text = models.TextField()
 
     reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 
-    uuid = models.CharField(max_length=UUID_LENGTH)
+    uuid = models.CharField(max_length=UUID_LENGTH, unique=True)
     created_at = models.DateField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['id']
 
     def __str__(self):
         return f'{self.room.name} - {self.text}'

@@ -9,45 +9,23 @@
         <!-- Inbox List -->
         <div class="col-12 col-md-8">
             <ul class="list-group">
+                {% for room in rooms %}
                 <li class="list-group-item">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <img class="img-fluid" src="{{user.image_url}}" alt="User 1" style="width: 70px; height: 70px;"> 
+                    <a href="{% url 'chat:inbox' room.uuid %}">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <img class="img-fluid" src="{{user.image_url}}" alt="User 1" style="width: 70px; height: 70px;"> 
+                            </div>
+                            
+                            <div class="ms-3">
+                                {{room}}
+                                <div class="small text-muted">lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+                                <div class="small text-muted">10:30 AM</div>
+                            </div>  
                         </div>
-                        
-                        <div class="ms-3">
-                            User 1
-                            <div class="small text-muted">lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-                            <div class="small text-muted">10:30 AM</div>
-                        </div>  
-                    </div>
+                    </a>
                 </li>
-                <li class="list-group-item">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <img class="img-fluid" src="{{user.image_url}}" alt="User 1" style="width: 70px; height: 70px;"> 
-                        </div>
-                        
-                        <div class="ms-3">
-                            User 1
-                            <div class="small text-muted">lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-                            <div class="small text-muted">10:30 AM</div>
-                        </div>  
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <img class="img-fluid" src="{{user.image_url}}" alt="User 1" style="width: 70px; height: 70px;"> 
-                        </div>
-                        
-                        <div class="ms-3">
-                            User 1
-                            <div class="small text-muted">lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-                            <div class="small text-muted">10:30 AM</div>
-                        </div>  
-                    </div>
-                </li>
+                {% endfor %}
               
             </ul>
         </div>

@@ -1,3 +1,5 @@
 from django.contrib import admin
+from . import models as chat_models
 
-# Register your models here.
+admin.site.register(chat_models.Room)
+admin.site.register(chat_models.Message)

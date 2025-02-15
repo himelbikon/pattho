@@ -35,16 +35,25 @@ DEBUG = DEV
 
 ALLOWED_HOSTS = []
 
+if DEV:
+    APP_URL = 'http://127.0.0.1:8000'
+else:
+    APP_URL = 'https://pattho.com'
 
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'channels',
+    'django_cleanup',
 
     'core',
     'user',
@@ -54,9 +63,6 @@ INSTALLED_APPS = [
     'saasowner',
     'dashboard',
     'chat',
-    
-
-    'django_cleanup',
 ]
 
 MIDDLEWARE = [
@@ -87,6 +93,7 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = 'pattho.asgi.application'
 WSGI_APPLICATION = 'pattho.wsgi.application'
 
 
@@ -118,6 +125,23 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+if PROD:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                'hosts': [('127.0.0.1', 6379)],  # Redis default port
+            },
+        },
+    }
+else:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        },
+    }
+
 
 
 # Internationalization

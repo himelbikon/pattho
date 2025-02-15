@@ -18,8 +18,8 @@
                             </div>
                             
                             <div class="ms-3">
-                                {{room}}
-                                <div class="small text-muted">lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+                                {{room.last_message.sender.name}}
+                                <div class="small text-muted">{{room.last_message.text|slice:":20"}}</div>
                                 <div class="small text-muted">10:30 AM</div>
                             </div>  
                         </div>

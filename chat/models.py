@@ -39,6 +39,7 @@ class Message(models.Model):
     text = models.TextField()
 
     reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    seener = models.ManyToManyField('user.User', blank=True, related_name='seeners')
 
     uuid = models.CharField(max_length=UUID_LENGTH, unique=True)
     created_at = models.DateField(auto_now_add=True)
